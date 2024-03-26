@@ -1,6 +1,6 @@
 ﻿namespace Blog.Models
 {
-    public class BaseEntity
+    public class Base
     {
         public int Id { get; set; }
     }

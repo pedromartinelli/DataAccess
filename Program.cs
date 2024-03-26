@@ -15,7 +15,7 @@ class Program
         //ReadRoles(connection);
         //ReadTags(connection);
         //ReadCategories(connection);
-        CreateUser(connection);
+        //CreateUser(connection);
         ReadUsers(connection);
         //UpdateUser();
         //DeleteUser(8);
@@ -47,7 +47,11 @@ class Program
 
         Console.WriteLine("\n-------- Users --------");
         foreach (var item in items)
+        {
             Console.WriteLine($"\n{item.Id} - {item.Name} - {item.Email}");
+            foreach (var role in item.Roles)
+                Console.WriteLine($"- {role}");
+        }
     }
 
     public static void ReadRoles(SqlConnection connection)

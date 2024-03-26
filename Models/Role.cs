@@ -3,7 +3,7 @@
 namespace Blog.Models
 {
     [Table("[Role]")]
-    public class Role : BaseEntity
+    public class Role : Base
     {
         public string Name { get; set; } = string.Empty;
         public string Slug { get; set; } = string.Empty;

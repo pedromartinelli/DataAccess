@@ -1,44 +1,15 @@
 ﻿using Blog.Models;
-using Dapper.Contrib.Extensions;
 using Microsoft.Data.SqlClient;
 
 namespace Blog.Repositories
 {
-    public class UserRepository
+    public class UserRepository : Repository<User>
     {
         private readonly SqlConnection _connection;
 
-        public UserRepository(SqlConnection connection)
+        public UserRepository(SqlConnection connection) : base(connection)
             => _connection = connection;
 
-        public void Create(User user)
-        {
-            user.Id = 0;
-            _connection.Insert(user);
-        }
 
-        public IEnumerable<User> GetAll()
-            => _connection.GetAll<User>();
-
-        public User Get(int id)
-            => _connection.Get<User>(id);
-
-        public void Update(User user)
-        {
-            if (user.Id != 0) _connection.Update(user);
-        }
-
-        public void Delete(User user)
-        {
-            if (user.Id != 0) _connection.Delete(user);
-        }
-
-        public void Delete(int id)
-        {
-            if (id == 0) return;
-
-            var user = _connection.Get<User>(id);
-            _connection.Delete(user);
-        }
     }
 }
