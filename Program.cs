@@ -12,21 +12,24 @@ class Program
 
     static void Main(string[] args)
     {
-        //ReadUsers();
+        var connection = new SqlConnection(CONNECTION_STRING);
+        connection.Open();
+        ReadUsers(connection);
         //CreateUser();
         //UpdateUser();
         //DeleteUser(8);
         //ReadUsers();
         //ReadUser(2);
+        connection.Close();
     }
 
-    public static void ReadUsers()
+    public static void ReadUsers(SqlConnection connection)
     {
-        var repository = new UserRepository();
+        var repository = new UserRepository(connection);
         var users = repository.GetAll();
 
         foreach (var user in users)
-            Console.WriteLine($"{user.Name} - {user.Email}");
+            Console.WriteLine($"\n{user.Id} - {user.Name} - {user.Email}");
     }
 
     public static void ReadUser(int userId)
