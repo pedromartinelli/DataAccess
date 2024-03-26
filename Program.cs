@@ -23,13 +23,10 @@ class Program
     public static void ReadUsers()
     {
         var repository = new UserRepository();
-
         var users = repository.GetAll();
 
         foreach (var user in users)
-        {
             Console.WriteLine($"{user.Name} - {user.Email}");
-        }
     }
 
     public static void ReadUser(int userId)
