@@ -11,8 +11,11 @@ namespace Blog.Repositories
         public UserRepository(SqlConnection connection)
             => _connection = connection;
 
-        public void CreateUser(User user)
-            => _connection.Insert(user);
+        public void Create(User user)
+        {
+            user.Id = 0;
+            _connection.Insert(user);
+        }
 
         public IEnumerable<User> GetAll()
             => _connection.GetAll<User>();
@@ -20,11 +23,20 @@ namespace Blog.Repositories
         public User Get(int id)
             => _connection.Get<User>(id);
 
-        public void UpdateUser(User user)
-            => _connection.Update(user);
-
-        public void DeleteUser(int id)
+        public void Update(User user)
         {
+            if (user.Id != 0) _connection.Update(user);
+        }
+
+        public void Delete(User user)
+        {
+            if (user.Id != 0) _connection.Delete(user);
+        }
+
+        public void Delete(int id)
+        {
+            if (id == 0) return;
+
             var user = _connection.Get<User>(id);
             _connection.Delete(user);
         }

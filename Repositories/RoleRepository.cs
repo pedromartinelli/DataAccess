@@ -22,10 +22,19 @@ namespace Blog.Repositories
             => _connection.Get<Role>(id);
 
         public void Update(Role role)
-            => _connection.Update(role);
+        {
+            if (role.Id != 0) _connection.Update(role);
+        }
+
+        public void Delete(Role role)
+        {
+            if (role.Id != 0) _connection.Delete(role);
+        }
 
         public void Delete(int id)
         {
+            if (id == 0) return;
+
             var role = _connection.Get<Role>(id);
             _connection.Delete(role);
         }
