@@ -1,4 +1,5 @@
-﻿using Blog.Repositories;
+﻿using Blog.Models;
+using Blog.Repositories;
 using Microsoft.Data.SqlClient;
 
 namespace Blog;
@@ -12,7 +13,7 @@ class Program
         var connection = new SqlConnection(CONNECTION_STRING);
         connection.Open();
         ReadUsers(connection);
-        ReadRoles(connection);
+        //ReadRoles(connection);
         //CreateUser();
         //UpdateUser();
         //DeleteUser(8);
@@ -23,7 +24,7 @@ class Program
 
     public static void ReadUsers(SqlConnection connection)
     {
-        var repository = new UserRepository(connection);
+        var repository = new Repository<User>(connection);
         var users = repository.GetAll();
 
         foreach (var user in users)
