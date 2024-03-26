@@ -16,7 +16,7 @@ class Program
         //ReadTags(connection);
         //ReadCategories(connection);
         //CreateUser(connection);
-        ReadUsers(connection);
+        ReadUsersWithRoles(connection);
         //UpdateUser();
         //DeleteUser(8);
         //ReadUsers();
@@ -49,8 +49,20 @@ class Program
         foreach (var item in items)
         {
             Console.WriteLine($"\n{item.Id} - {item.Name} - {item.Email}");
+        }
+    }
+
+    public static void ReadUsersWithRoles(SqlConnection connection)
+    {
+        var repository = new UserRepository(connection);
+        var items = repository.GetWithRoles();
+
+        Console.WriteLine("\n-------- Users --------");
+        foreach (var item in items)
+        {
+            Console.WriteLine($"\n{item.Id} - {item.Name}");
             foreach (var role in item.Roles)
-                Console.WriteLine($"- {role}");
+                Console.WriteLine($"- {role.Name}");
         }
     }
 
